@@ -73,6 +73,7 @@ class DbTest extends \PHPUnit_Framework_TestCase {
                 ->withNoArgs()
                 ->once()
                 ->getMock(),
+
             '',
             ''
         );
@@ -90,6 +91,78 @@ class DbTest extends \PHPUnit_Framework_TestCase {
                 m::mock()->shouldIgnoreMissing()->shouldReceive('bindValue')->getMock(),
                 '',
                 ''
+            )
+        );
+    }
+
+//--------------------------------------------------------------------------------------------------
+
+    public function testNewReadStatementCallsPdoPrepareWithProperQuery() {
+        self::db(
+            m::mock()
+                ->shouldReceive('prepare')
+                ->with('select json from annotations where id = :id')
+                ->once()
+                ->getMock()
+        )->newReadStatement();
+
+        m::close();
+    }
+
+    public function testNewReadStatementReturnsTheResultOfPdosPrepare() {
+        $stmt = new \stdClass;
+
+        $this->assertSame(
+            $stmt,
+
+            self::db(
+                m::mock()->shouldReceive('prepare')->andReturn($stmt)->getMock()
+            )->newReadStatement()
+        );
+    }
+
+    public function testReadBindsThePassedIdValue() {
+        self::db()->read(
+            m::mock()
+                ->shouldIgnoreMissing()
+                ->shouldReceive('bindValue')
+                ->with(':id', 42, \PDO::PARAM_INT)
+                ->once()
+                ->getMock(),
+
+            42
+        );
+
+        m::close();
+    }
+
+    public function testReadExecutesTheStatement() {
+        self::db()->read(
+            m::mock()
+                ->shouldIgnoreMissing()
+                ->shouldReceive('execute')
+                ->withNoArgs()
+                ->once()
+                ->getMock(),
+
+            33
+        );
+
+        m::close();
+    }
+
+    public function testReadReturnsTheResultOfFetchColumn() {
+        $this->assertSame(
+            'Lorem',
+
+            self::db()->read(
+                m::mock()
+                    ->shouldIgnoreMissing()
+                    ->shouldReceive('fetchColumn')
+                    ->andReturn('Lorem')
+                    ->getMock(),
+
+                1704
             )
         );
     }

@@ -7,18 +7,16 @@ class DbIntegrationTest extends \PHPUnit_Framework_TestCase {
         self::ramDb()->newCreateStatement();
     }
 
-    public function testCreateWorksOnRamDb() {
+    public function testCreateAndReadWorkOnRamDb() {
         $db = self::ramDb();
 
         $this->assertSame(
             '1',
-
-            $db->create(
-                $db->newCreateStatement(),
-                '{}',
-                'This is the text'
-            )
+            $db->create($db->newCreateStatement(), '{}', 'This is the text')
         );
+
+        $this->assertSame('{}', $db->read($db->newReadStatement(), 1));
+        $this->assertFalse($db->read($db->newReadStatement(), 42));
     }
 
 //--------------------------------------------------------------------------------------------------

@@ -33,4 +33,15 @@ EOF
 
         return $this->pdo->lastInsertId();
     }
+
+    public function newReadStatement() {
+        return $this->pdo->prepare('select json from annotations where id = :id');
+    }
+
+    public function read($pdoStatement, $id) {
+        $pdoStatement->bindValue(':id', $id, \PDO::PARAM_INT);
+        $pdoStatement->execute();
+
+        return $pdoStatement->fetchColumn();
+    }
 }
