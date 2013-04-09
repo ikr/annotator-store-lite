@@ -1,7 +1,6 @@
-curl:
-  pkg:
-    - installed
-
-git-core:
-  pkg:
-    - installed
+core:
+  pkg.installed:
+    - pkgs:
+      - curl
+      - git-core
+      - sqlite
