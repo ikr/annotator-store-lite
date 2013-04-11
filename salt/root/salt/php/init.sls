@@ -1,10 +1,14 @@
-php:
-  pkg.installed:
-    - pkgs:
-      - php5
-      - php5-cli
-      - php5-curl
-      - php5-sqlite
+php5:
+  pkg.installed
+
+php5-cli:
+  pkg.installed
+
+php5-curl:
+  pkg.installed
+
+php5-sqlite:
+  pkg.installed
 
 php5-fpm:
   pkg:
@@ -19,4 +23,4 @@ php5-fpm:
   file.managed:
     - source: salt://php/custom.ini
     - require:
-      - pkg: php
+      - pkg: php5
