@@ -22,6 +22,10 @@ EOF
         return $this;
     }
 
+    public function newIndexStatement() {
+        return $this->pdo->prepare('select id, json from annotations');
+    }
+
     public function newCreateStatement() {
         return $this->pdo->prepare('insert into annotations (json, text) values (:json, :text)');
     }

@@ -169,6 +169,37 @@ class DbTest extends \PHPUnit_Framework_TestCase {
 
 //--------------------------------------------------------------------------------------------------
 
+    public function testNewIndexStatementInvokesTheDbsPrepareWithTheProperQuery() {
+        self::db(
+            m::mock()
+                ->shouldIgnoreMissing()
+                ->shouldReceive('prepare')
+                ->with('select id, json from annotations')
+                ->once()
+                ->getMock()
+        )->newIndexStatement();
+
+        m::close();
+    }
+
+    public function testNewIndexStatementReturnsTheResultOfDbsPrepare() {
+        $stmt = new \stdClass;
+
+        $this->assertSame(
+            $stmt,
+
+            self::db(
+                m::mock()
+                    ->shouldIgnoreMissing()
+                    ->shouldReceive('prepare')
+                    ->andReturn($stmt)
+                    ->getMock()
+            )->newIndexStatement()
+        );
+    }
+
+//--------------------------------------------------------------------------------------------------
+
     private static function db($pdo = null) {
         return new Db(
             $pdo ?: m::mock()->shouldIgnoreMissing()->shouldReceive('lastInsertId')->getMock()
