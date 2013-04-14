@@ -261,6 +261,26 @@ class DbTest extends \PHPUnit_Framework_TestCase {
         );
     }
 
+    public function testUpdateBindsAllTheStatementValues() {
+        self::db()->update(
+            m::mock()
+                ->shouldIgnoreMissing()
+                ->shouldReceive('bindValue')->with(':id', 42, \PDO::PARAM_INT)->once()
+                ->ordered()
+                ->shouldReceive('bindValue')->with(':json', '{}', \PDO::PARAM_STR)->once()
+                ->ordered()
+                ->shouldReceive('bindValue')->with(':text', 'Z', \PDO::PARAM_STR)->once()
+                ->ordered()
+                ->getMock(),
+
+            42,
+            '{}',
+            'Z'
+        );
+
+        m::close();
+    }
+
 //--------------------------------------------------------------------------------------------------
 
     private static function db($pdo = null) {

@@ -59,4 +59,7 @@ EOF
             'update annotations set json = :json, text = :text where id = :id'
         );
     }
+
+    public function update($pdoStatement, $id, $json, $text) {
+    }
 }
