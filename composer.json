@@ -1,6 +1,7 @@
 {
     "name": "ikr/annotator-store-lite",
     "description": "A backend store for the Annotator -- http://annotateit.org/ -- based on PHP/Silex and SQLite",
+    "version": "0.1.0",
     "license": "MIT",
 
     "authors": [
