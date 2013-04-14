@@ -172,7 +172,6 @@ class DbTest extends \PHPUnit_Framework_TestCase {
     public function testNewIndexStatementInvokesTheDbsPrepareWithTheProperQuery() {
         self::db(
             m::mock()
-                ->shouldIgnoreMissing()
                 ->shouldReceive('prepare')
                 ->with('select id, json from annotations')
                 ->once()
@@ -190,11 +189,52 @@ class DbTest extends \PHPUnit_Framework_TestCase {
 
             self::db(
                 m::mock()
-                    ->shouldIgnoreMissing()
                     ->shouldReceive('prepare')
                     ->andReturn($stmt)
                     ->getMock()
             )->newIndexStatement()
+        );
+    }
+
+    public function testIndexExecutesThePassedStatement() {
+        self::db()->index(
+            m::mock()
+                ->shouldIgnoreMissing()
+                ->shouldReceive('execute')
+                ->withNoArgs()
+                ->once()
+                ->getMock()
+        );
+
+        m::close();
+    }
+
+    public function testIndexProperlyCallsTheStatementsFetchAll() {
+        self::db()->index(
+            m::mock()
+                ->shouldIgnoreMissing()
+                ->shouldReceive('fetchAll')
+                ->with(\PDO::FETCH_ASSOC)
+                ->once()
+                ->getMock()
+        );
+
+        m::close();
+    }
+
+    public function testIndexReturnsTheResultOfFetchAll() {
+        $rows = [['id' => 42, 'json' => '{}'], ['id' => 43, 'json' => '{}']];
+
+        $this->assertSame(
+            $rows,
+
+            self::db()->index(
+                m::mock()
+                    ->shouldIgnoreMissing()
+                    ->shouldReceive('fetchAll')
+                    ->andReturn($rows)
+                    ->getMock()
+            )
         );
     }
 

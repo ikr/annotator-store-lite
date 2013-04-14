@@ -26,6 +26,11 @@ EOF
         return $this->pdo->prepare('select id, json from annotations');
     }
 
+    public function index($pdoStatement) {
+        $pdoStatement->execute();
+        return $pdoStatement->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function newCreateStatement() {
         return $this->pdo->prepare('insert into annotations (json, text) values (:json, :text)');
     }

@@ -19,6 +19,11 @@ class DbIntegrationTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($db->read($db->newReadStatement(), 42));
     }
 
+    public function testIndexSqlSyntaxIsCorrect() {
+        $db = self::ramDb();
+        $db->index($db->newIndexStatement());
+    }
+
 //--------------------------------------------------------------------------------------------------
 
     private static function ramDb() {
