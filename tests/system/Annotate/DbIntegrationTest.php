@@ -24,6 +24,11 @@ class DbIntegrationTest extends \PHPUnit_Framework_TestCase {
         $db->index($db->newIndexStatement());
     }
 
+    public function testUpdateSqlSyntaxIsCorrect() {
+        $db = self::ramDb();
+        $db->update($db->newUpdateStatement(), 1, '{"a": "b"}', 'Ipsum ipsum');
+    }
+
 //--------------------------------------------------------------------------------------------------
 
     private static function ramDb() {

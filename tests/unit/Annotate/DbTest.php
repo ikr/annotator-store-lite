@@ -281,6 +281,23 @@ class DbTest extends \PHPUnit_Framework_TestCase {
         m::close();
     }
 
+    public function testUpdateExecutesThePdoStatement() {
+        self::db()->update(
+            m::mock()
+                ->shouldIgnoreMissing()
+                ->shouldReceive('execute')
+                ->withNoArgs()
+                ->once()
+                ->getMock(),
+
+            43,
+            '{"a"": 13}',
+            'Lorem lorem'
+        );
+
+        m::close();
+    }
+
 //--------------------------------------------------------------------------------------------------
 
     private static function db($pdo = null) {
