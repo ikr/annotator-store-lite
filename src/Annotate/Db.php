@@ -53,4 +53,10 @@ EOF
 
         return $pdoStatement->fetchColumn();
     }
+
+    public function newUpdateStatement() {
+        return $this->pdo->prepare(
+            'update annotations set json = :json, text = :text where id = :id'
+        );
+    }
 }

@@ -188,10 +188,7 @@ class DbTest extends \PHPUnit_Framework_TestCase {
             $stmt,
 
             self::db(
-                m::mock()
-                    ->shouldReceive('prepare')
-                    ->andReturn($stmt)
-                    ->getMock()
+                m::mock()->shouldReceive('prepare')->andReturn($stmt)->getMock()
             )->newIndexStatement()
         );
     }
@@ -235,6 +232,32 @@ class DbTest extends \PHPUnit_Framework_TestCase {
                     ->andReturn($rows)
                     ->getMock()
             )
+        );
+    }
+
+//--------------------------------------------------------------------------------------------------
+
+    public function testNewUpdateStatementCallsPdosPrepareWithProperQuery() {
+        self::db(
+            m::mock()
+                ->shouldReceive('prepare')
+                ->with('update annotations set json = :json, text = :text where id = :id')
+                ->once()
+                ->getMock()
+        )->newUpdateStatement();
+
+        m::close();
+    }
+
+    public function testNewIndexSatementReturnsTheResultOfPrepare() {
+        $stmt = new \stdClass;
+
+        $this->assertSame(
+            $stmt,
+
+            self::db(
+                m::mock()->shouldReceive('prepare')->andReturn($stmt)->getMock()
+            )->newUpdateStatement()
         );
     }
 
