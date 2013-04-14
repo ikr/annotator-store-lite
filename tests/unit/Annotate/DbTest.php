@@ -323,6 +323,36 @@ class DbTest extends \PHPUnit_Framework_TestCase {
         );
     }
 
+    public function testDeleteBindsTheIdValueAgainstThePassedPdoStatement() {
+        self::db()->delete(
+            m::mock()
+                ->shouldIgnoreMissing()
+                ->shouldReceive('bindValue')
+                ->with(':id', 2037, \PDO::PARAM_INT)
+                ->once()
+                ->getMock(),
+
+            2037
+        );
+
+        m::close();
+    }
+
+    public function testDeleteExecutesThePdoStatement() {
+        self::db()->delete(
+            m::mock()
+                ->shouldIgnoreMissing()
+                ->shouldReceive('execute')
+                ->withNoArgs()
+                ->once()
+                ->getMock(),
+
+            2045
+        );
+
+        m::close();
+    }
+
 //--------------------------------------------------------------------------------------------------
 
     private static function db($pdo = null) {

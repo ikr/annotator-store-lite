@@ -29,6 +29,11 @@ class DbIntegrationTest extends \PHPUnit_Framework_TestCase {
         $db->update($db->newUpdateStatement(), 1, '{"a": "b"}', 'Ipsum ipsum');
     }
 
+    public function testDeleteSqlSyntaxIsCorrect() {
+        $db = self::ramDb();
+        $db->delete($db->newDeleteStatement(), 2048);
+    }
+
 //--------------------------------------------------------------------------------------------------
 
     private static function ramDb() {

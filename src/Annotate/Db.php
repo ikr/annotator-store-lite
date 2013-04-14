@@ -71,4 +71,9 @@ EOF
     public function newDeleteStatement() {
         return $this->pdo->prepare('delete from annotations where id = :id');
     }
+
+    public function delete($pdoStatement, $id) {
+        $pdoStatement->bindValue(':id', $id, \PDO::PARAM_INT);
+        $pdoStatement->execute();
+    }
 }
