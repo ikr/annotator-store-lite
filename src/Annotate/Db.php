@@ -67,4 +67,8 @@ EOF
 
         $pdoStatement->execute();
     }
+
+    public function newDeleteStatement() {
+        return $this->pdo->prepare('delete from annotations where id = :id');
+    }
 }

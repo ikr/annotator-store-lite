@@ -299,6 +299,31 @@ class DbTest extends \PHPUnit_Framework_TestCase {
     }
 
 //--------------------------------------------------------------------------------------------------
+    public function testNewDeleteStatementCallsPdosPrepareWithTheProperQuery() {
+        self::db(
+            m::mock()
+                ->shouldReceive('prepare')
+                ->with('delete from annotations where id = :id')
+                ->once()
+                ->getMock()
+        )->newDeleteStatement();
+
+        m::close();
+    }
+
+    public function testNewCreateStatementReturnsTheResultOfThePrepareCall() {
+        $stmt = new \stdClass;
+
+        $this->assertSame(
+            $stmt,
+
+            self::db(
+                m::mock()->shouldReceive('prepare')->andReturn($stmt)->getMock()
+            )->newDeleteStatement()
+        );
+    }
+
+//--------------------------------------------------------------------------------------------------
 
     private static function db($pdo = null) {
         return new Db(
