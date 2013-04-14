@@ -61,5 +61,8 @@ EOF
     }
 
     public function update($pdoStatement, $id, $json, $text) {
+        $pdoStatement->bindValue(':id', $id, \PDO::PARAM_INT);
+        $pdoStatement->bindValue(':json', $json, \PDO::PARAM_STR);
+        $pdoStatement->bindValue(':text', $text, \PDO::PARAM_STR);
     }
 }
