@@ -21,7 +21,7 @@ class DbIntegrationTest extends \PHPUnit_Framework_TestCase {
 
     public function testIndexSqlSyntaxIsCorrect() {
         $db = self::ramDb();
-        $db->index($db->newIndexStatement());
+        $this->assertSame([], $db->index($db->newIndexStatement()));
     }
 
     public function testUpdateSqlSyntaxIsCorrect() {
