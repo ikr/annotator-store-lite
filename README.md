@@ -1,6 +1,7 @@
 # Overview
 
-A backend store for the [Annotator](http://annotateit.org/), based on PHP/Silex and SQLite
+A backend store for the [Annotator](http://annotateit.org/), based on PHP/Silex and SQLite. This is
+a _work in progress._ Please _DO NOT use_ just yet. Will be ready _pretty soon,_ though.
 
 # Installation for production
 
