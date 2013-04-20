@@ -6,3 +6,9 @@ sudo mv composer.phar /usr/local/bin/composer
 # composer packages installation, DB schema creation, etc.
 
 composer install --dev
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+sqlite3 $DIR/data/db.sqlite ''
+php $DIR/scripts/init_db.php
+chmod 777 $DIR/data/db.sqlite
+echo 'Empty DB created'

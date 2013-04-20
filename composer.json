@@ -24,8 +24,7 @@
     },
 
     "autoload": {
-        "psr-0": {
-            "Annotate": "src"
-        }
+        "psr-0": {"Annotate": "src"},
+        "files": ["src/Annotate/functions.php"]
     }
 }

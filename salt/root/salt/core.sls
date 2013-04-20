@@ -4,5 +4,5 @@ curl:
 git:
   pkg.installed
 
-sqlite:
+sqlite3:
   pkg.installed
