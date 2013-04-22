@@ -1,10 +1,16 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+namespace Annotate;
 
-use Silex\Application;
+require __DIR__.'/../vendor/autoload.php';
+
+use \Silex\Application;
 
 $app = new Application;
+
+$app['db'] = $app->share(function () {
+    return globalDb();
+});
 
 $app->get('/', function () use ($app) {
     return $app->json([
@@ -14,4 +20,15 @@ $app->get('/', function () use ($app) {
     ]);
 });
 
+$app->get('/annotations', function () use ($app) {
+    return delegateToController($app, 'index');
+});
+
 $app->run();
+
+//--------------------------------------------------------------------------------------------------
+
+function delegateToController($app, $method) {
+    $result = (new Controller(new Db($app['db'])))->$method();
+    return $app->json($result['data'], $result['status'], $result['headers']);
+}
