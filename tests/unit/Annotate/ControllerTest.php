@@ -45,6 +45,21 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
 
 //--------------------------------------------------------------------------------------------------
 
+    public function testCreateDelegatesToTheDb() {
+        $stmt = new \stdClass;
+
+        (new Controller(
+            m::mock()
+            ->shouldReceive('newCreateStatement')->withNoArgs()->once()->andReturn($stmt)
+            ->ordered()
+            ->shouldReceive('create')->with($stmt, '{"text":"S12"}', 'S12')->once()
+            ->ordered()
+            ->getMock()
+        ))->create(['text' => 'S12']);
+    }
+
+//--------------------------------------------------------------------------------------------------
+
     private static function dbStub() {
         return m::mock()->shouldIgnoreMissing()->shouldReceive('index')->andReturn([])->getMock();
     }

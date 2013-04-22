@@ -26,4 +26,12 @@ class Controller {
             )
         ];
     }
+
+    public function create($annotationData) {
+        $this->db->create(
+            $this->db->newCreateStatement(),
+            json_encode($annotationData),
+            $annotationData['text']
+        );
+    }
 }
