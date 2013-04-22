@@ -9,6 +9,12 @@ class IndexTest extends \PHPUnit_Framework_TestCase {
         $this->assertSame(200, self::response()->getStatusCode());
     }
 
+    public function testTheResponseBodyIsJsonArray() {
+        $body = strval(self::response()->getBody());
+        json_decode($body, true);
+        $this->assertStringStartsWith('[', $body);
+    }
+
  //--------------------------------------------------------------------------------------------------
 
     private static function response() {
