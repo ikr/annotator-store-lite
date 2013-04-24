@@ -2,7 +2,7 @@
 
 Vagrant::Config.run do |config|
   config.vm.box = "quantal64"
-  config.vm.forward_port 80, 8000
+  config.vm.forward_port 80, 8080
 
   config.vm.share_folder "vagrant-root", "/vagrant", "."
   config.vm.share_folder "salt_file_root", "/srv", "./salt/root"
