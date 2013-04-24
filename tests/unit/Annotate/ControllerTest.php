@@ -8,7 +8,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
     public function testIndexDelegatesToTheDb() {
         $stmt = new \stdClass;
 
-        (new Controller(
+        self::c(
             m::mock()
                 ->shouldReceive('newIndexStatement')->withNoArgs()->once()->andReturn($stmt)
                 ->ordered()
@@ -16,7 +16,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
                 ->andReturn([])
                 ->ordered()
                 ->getMock()
-        ))->index();
+        )->index();
 
         m::close();
     }
@@ -25,22 +25,22 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(
             [['id' => 42, 'foo' => 'bar']],
 
-            (new Controller(
+            self::c(
                 m::mock()
                     ->shouldIgnoreMissing()
                     ->shouldReceive('index')
                     ->andReturn([['id' => 42, 'json' => '{"foo":"bar"}']])
                     ->getMock()
-            ))->index()['data']
+            )->index()['data']
         );
     }
 
     public function testIndexIsNormally200() {
-        $this->assertSame(200, (new Controller(self::dbStub()))->index()['status']);
+        $this->assertSame(200, self::c(self::dbStub())->index()['status']);
     }
 
     public function testIndexesHeadersMapIsEmpty() {
-        $this->assertSame([], (new Controller(self::dbStub()))->index()['headers']);
+        $this->assertSame([], self::c(self::dbStub())->index()['headers']);
     }
 
 //--------------------------------------------------------------------------------------------------
@@ -48,17 +48,21 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
     public function testCreateDelegatesToTheDb() {
         $stmt = new \stdClass;
 
-        (new Controller(
+        self::c(
             m::mock()
             ->shouldReceive('newCreateStatement')->withNoArgs()->once()->andReturn($stmt)
             ->ordered()
             ->shouldReceive('create')->with($stmt, '{"text":"S12"}', 'S12')->once()
             ->ordered()
             ->getMock()
-        ))->create(['text' => 'S12']);
+        )->create(['text' => 'S12']);
     }
 
 //--------------------------------------------------------------------------------------------------
+
+    private static function c($db) {
+        return new Controller($db, 'http://example.com/foo');
+    }
 
     private static function dbStub() {
         return m::mock()->shouldIgnoreMissing()->shouldReceive('index')->andReturn([])->getMock();
