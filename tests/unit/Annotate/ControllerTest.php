@@ -35,7 +35,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
         );
     }
 
-    public function testIndexIsNormally200() {
+    public function testIndexStatusIsNormally200() {
         $this->assertSame(200, self::c(self::dbStub())->index()['status']);
     }
 
@@ -58,6 +58,24 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
         )->create(['text' => 'S12']);
     }
 
+    public function testCreateReturnsNullAsItsResponseData() {
+        $result = self::c(self::dbStub())->create(['text' => '∞']);
+
+        $this->assertArrayHasKey('data', $result);
+        $this->assertNull($result['data']);
+    }
+
+    public function testCreateStatusIs303() {
+        $this->assertSame(303, self::c(self::dbStub())->create(['text' => '∞'])['status']);
+    }
+
+    public function testCreateSendsTheLocationHeaderPointingToTheJustCreatedResource() {
+        $this->assertSame(
+            ['Location' => 'http://example.com/foo/annotations/2112'],
+            self::c(self::dbStub())->create(['text' => '∞'])['headers']
+        );
+    }
+
 //--------------------------------------------------------------------------------------------------
 
     private static function c($db) {
@@ -65,6 +83,10 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
     }
 
     private static function dbStub() {
-        return m::mock()->shouldIgnoreMissing()->shouldReceive('index')->andReturn([])->getMock();
+        return m::mock()
+            ->shouldIgnoreMissing()
+            ->shouldReceive('index')->andReturn([])
+            ->shouldReceive('create')->andReturn(2112)
+            ->getMock();
     }
 }

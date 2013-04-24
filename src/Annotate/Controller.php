@@ -4,9 +4,11 @@ namespace Annotate;
 
 class Controller {
     private $db;
+    private $apiRootUrlWithoutTrailingSlash;
 
-    public function __construct($db) {
+    public function __construct($db, $apiRootUrlWithoutTrailingSlash) {
         $this->db = $db;
+        $this->apiRootUrlWithoutTrailingSlash = $apiRootUrlWithoutTrailingSlash;
     }
 
     public function index() {
@@ -28,10 +30,23 @@ class Controller {
     }
 
     public function create($annotationData) {
-        $this->db->create(
+        $id = $this->db->create(
             $this->db->newCreateStatement(),
             json_encode($annotationData),
             $annotationData['text']
         );
+
+        return [
+            'status' => 303,
+
+            'headers' => [
+                'Location' => implode(
+                    '/',
+                    [$this->apiRootUrlWithoutTrailingSlash, 'annotations', $id]
+                )
+            ],
+
+            'data' => null
+        ];
     }
 }
