@@ -30,23 +30,19 @@ class Controller {
     }
 
     public function create($annotationData) {
-        $id = $this->db->create(
-            $this->db->newCreateStatement(),
-            json_encode($annotationData),
-            $annotationData['text']
-        );
-
         return [
-            'status' => 303,
+            'status' => 200,
+            'headers' => [],
 
-            'headers' => [
-                'Location' => implode(
-                    '/',
-                    [$this->apiRootUrlWithoutTrailingSlash, 'annotations', $id]
-                )
-            ],
+            'data' => array_merge(
+                $annotationData,
 
-            'data' => null
+                ['id' => $this->db->create(
+                    $this->db->newCreateStatement(),
+                    json_encode($annotationData),
+                    $annotationData['text']
+                )]
+            )
         ];
     }
 }

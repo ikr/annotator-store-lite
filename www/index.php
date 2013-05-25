@@ -37,6 +37,10 @@ $app->post('/annotations', function (Request $req) use ($app) {
     return delegateToController($app, 'create', json_decode($req->getContent(), true));
 });
 
+$app->get('/annotations/{id}', function ($id) use ($app) {
+    return $app->json(['msg' => 'Not implemented']);
+});
+
 $app->run();
 
 //--------------------------------------------------------------------------------------------------

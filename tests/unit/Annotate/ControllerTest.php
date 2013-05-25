@@ -58,20 +58,20 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
         )->create(['text' => 'S12']);
     }
 
-    public function testCreateReturnsNullAsItsResponseData() {
+    public function testCreateReturnsTheJustCreatedObjectWithIdAsTheResponseData() {
         $result = self::c(self::dbStub())->create(['text' => '∞']);
 
         $this->assertArrayHasKey('data', $result);
-        $this->assertNull($result['data']);
+        $this->assertSame(['text' => '∞', 'id' => 2112], $result['data']);
     }
 
-    public function testCreateStatusIs303() {
-        $this->assertSame(303, self::c(self::dbStub())->create(['text' => '∞'])['status']);
+    public function testCreateStatusIs200() {
+        $this->assertSame(200, self::c(self::dbStub())->create(['text' => '∞'])['status']);
     }
 
-    public function testCreateSendsTheLocationHeaderPointingToTheJustCreatedResource() {
+    public function testCreateSendsNoAdditionalHeaders() {
         $this->assertSame(
-            ['Location' => 'http://example.com/foo/annotations/2112'],
+            [],
             self::c(self::dbStub())->create(['text' => '∞'])['headers']
         );
     }
