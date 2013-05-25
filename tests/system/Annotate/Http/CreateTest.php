@@ -11,6 +11,8 @@ class CreateTest extends \PHPUnit_Framework_TestCase {
             null,
             json_encode(self::newAnnotationData())
         )->send();
+
+        $this->assertGreaterThan(0, intval($resp->json()['id']));
     }
 
 //--------------------------------------------------------------------------------------------------
