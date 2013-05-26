@@ -108,6 +108,23 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
 
 //--------------------------------------------------------------------------------------------------
 
+    public function testUpdateDelegatesToTheDb() {
+        $stmt = new \stdClass;
+
+        self::c(
+            m::mock()
+            ->shouldReceive('newUpdateStatement')->withNoArgs()->once()->andReturn($stmt)
+            ->ordered()
+            ->shouldReceive('update')->with($stmt, 1758, '{"text":"S12"}', 'S12')->once()
+            ->ordered()
+            ->getMock()
+        )->update(1758, ['text' => 'S12']);
+
+        m::close();
+    }
+
+//--------------------------------------------------------------------------------------------------
+
     private static function c($db) {
         return new Controller($db, 'http://example.com/foo');
     }

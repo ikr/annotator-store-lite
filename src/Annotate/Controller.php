@@ -57,4 +57,13 @@ class Controller {
             )
         ];
     }
+
+    public function update($id, $annotationData) {
+        $this->db->update(
+            $this->db->newUpdateStatement(),
+            $id,
+            json_encode($annotationData),
+            $annotationData['text']
+        );
+    }
 }
