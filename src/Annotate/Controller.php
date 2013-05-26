@@ -45,4 +45,16 @@ class Controller {
             )
         ];
     }
+
+    public function read($id) {
+        return [
+            'status' => 200,
+            'headers' => [],
+
+            'data' => array_merge(
+                json_decode($this->db->read($this->db->newReadStatement(), $id), true),
+                ['id' => $id]
+            )
+        ];
+    }
 }

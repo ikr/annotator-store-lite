@@ -62,7 +62,6 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
 
     public function testCreateReturnsTheJustCreatedObjectWithIdAsTheResponseData() {
         $result = self::c(self::dbStub())->create(['text' => '∞']);
-
         $this->assertArrayHasKey('data', $result);
         $this->assertSame(['text' => '∞', 'id' => 2112], $result['data']);
     }
@@ -80,6 +79,35 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
 
 //--------------------------------------------------------------------------------------------------
 
+    public function testReadDelegatesToTheDb() {
+        $stmt = new \stdClass;
+
+        self::c(
+            m::mock()
+            ->shouldReceive('newReadStatement')->withNoArgs()->once()->andReturn($stmt)
+            ->ordered()
+            ->shouldReceive('read')->with($stmt, 1650)->once()->andReturn('{}')
+            ->ordered()
+            ->getMock()
+        )->read(1650);
+    }
+
+    public function testReadReturnsTheDbDataWithAnIdAdded() {
+        $result = self::c(self::dbStub())->read(1709);
+        $this->assertArrayHasKey('data', $result);
+        $this->assertSame(['mlue' => 42, 'id' => 1709], $result['data']);
+    }
+
+    public function testReadStatusIs200() {
+        $this->assertSame(200, self::c(self::dbStub())->read(1720)['status']);
+    }
+
+    public function testReadSendsNoAdditionalHeaders() {
+        $this->assertSame([], self::c(self::dbStub())->read(1721)['headers']);
+    }
+
+//--------------------------------------------------------------------------------------------------
+
     private static function c($db) {
         return new Controller($db, 'http://example.com/foo');
     }
@@ -89,6 +117,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
             ->shouldIgnoreMissing()
             ->shouldReceive('index')->andReturn([])
             ->shouldReceive('create')->andReturn(2112)
+            ->shouldReceive('read')->andReturn('{"mlue":42}')
             ->getMock();
     }
 }
