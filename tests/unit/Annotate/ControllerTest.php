@@ -10,12 +10,12 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
 
         self::c(
             m::mock()
-                ->shouldReceive('newIndexStatement')->withNoArgs()->once()->andReturn($stmt)
-                ->ordered()
-                ->shouldReceive('index')->with($stmt)->once()
-                ->andReturn([])
-                ->ordered()
-                ->getMock()
+            ->shouldReceive('newIndexStatement')->withNoArgs()->once()->andReturn($stmt)
+            ->ordered()
+            ->shouldReceive('index')->with($stmt)->once()
+            ->andReturn([])
+            ->ordered()
+            ->getMock()
         )->index();
 
         m::close();
@@ -27,10 +27,10 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
 
             self::c(
                 m::mock()
-                    ->shouldIgnoreMissing()
-                    ->shouldReceive('index')
-                    ->andReturn([['id' => 42, 'json' => '{"foo":"bar"}']])
-                    ->getMock()
+                ->shouldIgnoreMissing()
+                ->shouldReceive('index')
+                ->andReturn([['id' => 42, 'json' => '{"foo":"bar"}']])
+                ->getMock()
             )->index()['data']
         );
     }
