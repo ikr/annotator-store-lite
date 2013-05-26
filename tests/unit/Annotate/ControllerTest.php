@@ -56,6 +56,8 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
             ->ordered()
             ->getMock()
         )->create(['text' => 'S12']);
+
+        m::close();
     }
 
     public function testCreateReturnsTheJustCreatedObjectWithIdAsTheResponseData() {
