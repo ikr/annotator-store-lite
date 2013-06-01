@@ -24,8 +24,9 @@ From this project's root run:
 
     ~/Sandbox/annotator-store-lite(master)$ vagrant up
 
-That will provision the development VM start-up. When the provisioning is done, you can ssh into the
-guest OS by
+That will provision the development VM start-up. You'll be asked for the host OS'es root
+password. That's fine; vagrant needs it to mount the source directory into the guest OS via
+NFS. When the provisioning is done, you can ssh into the guest OS by
 
     ~/Sandbox/annotator-store-lite(master)$ vagrant ssh
 
