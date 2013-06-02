@@ -41,14 +41,18 @@ $app->get('/annotations/{id}', function ($id) use ($app) {
     return delegateToController($app, 'read', $id);
 });
 
+$app->put('/annotations/{id}', function ($id, Request $req) use ($app) {
+    return delegateToController($app, 'update', $id, json_decode($req->getContent(), true));
+});
+
 $app->run();
 
 //--------------------------------------------------------------------------------------------------
 
-function delegateToController($app, $method, $param) {
+function delegateToController($app, $method, $param1, $param2) {
     $result = (
         new Controller(new Db($app['db']), $app['apiRootUrlWithoutTrailingSlash'])
-    )->$method($param);
+    )->$method($param1, $param2);
 
     return $app->json($result['data'], $result['status'], $result['headers']);
 }

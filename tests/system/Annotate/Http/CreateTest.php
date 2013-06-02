@@ -5,7 +5,7 @@ namespace Annotate\Http;
 use Guzzle\Http\Client;
 
 class CreateTest extends \PHPUnit_Framework_TestCase {
-    public function testCreatedAnnotationCanBeFetchedListedAndDeleted() {
+    public function testCreatedAnnotationCanBeFetchedUpdatedListedAndDeleted() {
         $client = new Client('http://127.0.0.1');
 
         $resp = $client->post(
@@ -21,6 +21,9 @@ class CreateTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertSame(200, $client->get("/annotations/$id")->send()->getStatusCode());
         $this->assertSame($id, intval($client->get("/annotations/$id")->send()->json()['id']));
+
+        $client->put("/annotations/$id", null, '{"text":"lala"}')->send();
+        $this->assertSame('lala', $client->get("/annotations/$id")->send()->json()['text']);
     }
 
 //--------------------------------------------------------------------------------------------------
