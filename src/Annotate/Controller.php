@@ -65,5 +65,11 @@ class Controller {
             json_encode($annotationData),
             $annotationData['text']
         );
+
+        return [
+            'status' => 200,
+            'headers' => [],
+            'data' => array_merge($annotationData, ['id' => $id])
+        ];
     }
 }

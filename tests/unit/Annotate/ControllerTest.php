@@ -123,6 +123,19 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
         m::close();
     }
 
+    public function testUpdateReturnsTheAnnotationDataMergedWithTheIdInThePayload() {
+        $this->assertSame(
+            ['text' => 'yolo', 'id' => 26],
+            self::c(self::dbStub())->update(26, ['text' => 'yolo'])['data']
+        );
+    }
+
+    public function testUpdateReturnsTheNormalStatusAndNoExtraHeaders() {
+        $result = self::c(self::dbStub())->update(1, ['text' => 'ok']);
+        $this->assertSame(200, $result['status']);
+        $this->assertSame([], $result['headers']);
+    }
+
 //--------------------------------------------------------------------------------------------------
 
     private static function c($db) {
