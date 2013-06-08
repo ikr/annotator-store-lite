@@ -137,6 +137,33 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
     }
 
 //--------------------------------------------------------------------------------------------------
+    public function testDeleteDelegatesToTheDb() {
+        $stmt = new \stdClass;
+
+        self::c(
+            m::mock()
+            ->shouldReceive('newDeleteStatement')->withNoArgs()->once()->andReturn($stmt)
+            ->ordered()
+            ->shouldReceive('delete')->with($stmt, 745)->once()
+            ->ordered()
+            ->getMock()
+        )->delete(745);
+
+        m::close();
+    }
+
+    public function testDeleteStatusIs204() {
+        $this->assertSame(204, self::c(self::dbStub())->delete(754)['status']);
+    }
+
+    public function testDeleteReturnsNoExtraHeadersAndTheNullData() {
+        $result = self::c(self::dbStub())->delete(758);
+
+        $this->assertSame([], $result['headers']);
+        $this->assertSame(null, $result['data']);
+    }
+
+//--------------------------------------------------------------------------------------------------
 
     private static function c($db) {
         return new Controller($db, 'http://example.com/foo');

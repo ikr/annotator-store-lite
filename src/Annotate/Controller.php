@@ -72,4 +72,14 @@ class Controller {
             'data' => array_merge($annotationData, ['id' => $id])
         ];
     }
+
+    public function delete($id) {
+        $this->db->delete($this->db->newDeleteStatement(), $id);
+
+        return [
+            'status' => 204,
+            'headers' => [],
+            'data' => null
+        ];
+    }
 }
