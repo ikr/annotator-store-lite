@@ -6,6 +6,9 @@ sudo mv composer.phar /usr/local/bin/composer
 # composer packages installation, DB schema creation, etc.
 
 composer install --dev
+cd ./www/demo
+bower install
+cd ../..
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
