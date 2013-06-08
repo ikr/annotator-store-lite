@@ -45,4 +45,4 @@ and [continue the installation there](http://memegenerator.net/instance/33516935
 ## v0.1.0 published on 2013-06-08
 
 1. Functional Annotator Store API (without search)
-2. A working demo page with the front-en plugged in
+2. A working demo page with the front-end plugged in
