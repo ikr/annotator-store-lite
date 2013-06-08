@@ -57,12 +57,15 @@ human body but one.  The brain!  The brain is what life is all about.
 
     <script src="components/jquery/jquery.min.js"></script>
     <script src="components/annotator/annotator.min.js"></script>
+    <script src="components/annotator/annotator.store.min.js"></script>
 
     <script>
       $(function () {
         'use strict';
 
-        $(document.body).annotator();
+        var content = $(document.body).annotator();
+
+        content.annotator('addPlugin', 'Store', {prefix: ''});
       });
     </script>
   </body>
