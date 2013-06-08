@@ -45,6 +45,10 @@ $app->put('/annotations/{id}', function ($id, Request $req) use ($app) {
     return delegateToController($app, 'update', $id, json_decode($req->getContent(), true));
 });
 
+$app->delete('/annotations/{id}', function ($id) use ($app) {
+    return delegateToController($app, 'delete', $id);
+});
+
 $app->run();
 
 //--------------------------------------------------------------------------------------------------

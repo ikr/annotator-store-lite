@@ -47,13 +47,16 @@ class Controller {
     }
 
     public function read($id) {
+        $json = $this->db->read($this->db->newReadStatement(), $id);
+
         return [
-            'status' => 200,
+            'status' => ($json ? 200 : 404),
             'headers' => [],
 
-            'data' => array_merge(
-                json_decode($this->db->read($this->db->newReadStatement(), $id), true),
-                ['id' => $id]
+            'data' => (
+                $json ?
+                array_merge(json_decode($json, true), ['id' => $id]) :
+                null
             )
         ];
     }

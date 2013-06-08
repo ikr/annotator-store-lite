@@ -3,6 +3,7 @@
 namespace Annotate\Http;
 
 use Guzzle\Http\Client;
+use Guzzle\Http\Exception\ClientErrorResponseException;
 
 class CreateTest extends \PHPUnit_Framework_TestCase {
     public function testCreatedAnnotationCanBeFetchedUpdatedListedAndDeleted() {
@@ -24,6 +25,18 @@ class CreateTest extends \PHPUnit_Framework_TestCase {
 
         $client->put("/annotations/$id", null, '{"text":"lala"}')->send();
         $this->assertSame('lala', $client->get("/annotations/$id")->send()->json()['text']);
+
+        $this->assertSame(204, $client->delete("/annotations/$id")->send()->getStatusCode());
+
+        try {
+            $client->get("/annotations/$id")->send()->getStatusCode();
+        }
+        catch (ClientErrorResponseException $ex) {
+            $this->assertSame(404, $ex->getResponse()->getStatusCode());
+            return;
+        }
+
+        $this->fail('Expected ClientErrorResponseException');
     }
 
 //--------------------------------------------------------------------------------------------------

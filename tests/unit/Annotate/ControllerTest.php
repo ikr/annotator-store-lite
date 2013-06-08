@@ -106,6 +106,19 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
         $this->assertSame([], self::c(self::dbStub())->read(1721)['headers']);
     }
 
+    public function testReadReturns404IfTheIdIsntFoundInTheDb() {
+        $this->assertSame(
+            404,
+
+            self::c(
+                m::mock()
+                ->shouldIgnoreMissing()
+                ->shouldReceive('read')->andReturn(false)
+                ->getMock()
+            )->read(-13)['status']
+        );
+    }
+
 //--------------------------------------------------------------------------------------------------
 
     public function testUpdateDelegatesToTheDb() {
