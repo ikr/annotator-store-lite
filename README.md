@@ -1,7 +1,6 @@
 # Overview
 
-A backend store for the [Annotator](http://annotateit.org/), based on PHP/Silex and SQLite. This is
-a **work in progress.** Please **DO NOT use** just yet. Will be ready **pretty soon,** though.
+A backend store for the [Annotator](http://annotateit.org/), based on PHP/Silex and SQLite.
 
 # Installation for production
 
@@ -43,7 +42,7 @@ and [continue the installation there](http://memegenerator.net/instance/33516935
 
 # Change log
 
-## v0.0.1 published on YYYY-MM-YY
+## v0.1.0 published on 2013-06-08
 
-1. ?
-1. ?
+1. Functional Annotator Store API (without search)
+2. A working demo page with the front-en plugged in
