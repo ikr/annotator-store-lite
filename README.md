@@ -4,7 +4,27 @@ A backend store for the [Annotator](http://annotateit.org/), based on PHP/Silex 
 
 # Installation for production
 
-TBD
+Sample nginx configuration:
+
+    location /annotator-store-lite/ {
+        root /srv/www/annotator-store-lite/www;
+        try_files $uri $uri/ @annotatorstore;
+    }
+
+    location @annotatorstore {
+        fastcgi_pass 127.0.0.1:9000;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME /srv/www/annotator-store-lite/www/index.php;
+        fastcgi_param REQUEST_URI $uri;
+        rewrite ^/annotator-store-lite/(.*)$ /$1 break;
+    }
+
+Configure the Web application's "mount" path:
+
+    $ cd /srv/www/annotator-store-lite
+    $ cp ./CONFIG.sample.json ./CONFIG.json
+
+Edit `CONFIG.json`: set `apiRootUrlWithoutTrailingSlash` to `/annotator-store-lite`.
 
 # Installation for development
 

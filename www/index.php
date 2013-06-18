@@ -30,15 +30,15 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('/annotations', function () use ($app) {
-    return delegateToController($app, 'index');
+    return delegateToController($app, 'index', null);
 });
 
 $app->post('/annotations', function (Request $req) use ($app) {
-    return delegateToController($app, 'create', json_decode($req->getContent(), true));
+    return delegateToController($app, 'create', json_decode($req->getContent(), true), null);
 });
 
 $app->get('/annotations/{id}', function ($id) use ($app) {
-    return delegateToController($app, 'read', $id);
+    return delegateToController($app, 'read', $id, null);
 });
 
 $app->put('/annotations/{id}', function ($id, Request $req) use ($app) {
@@ -46,7 +46,7 @@ $app->put('/annotations/{id}', function ($id, Request $req) use ($app) {
 });
 
 $app->delete('/annotations/{id}', function ($id) use ($app) {
-    return delegateToController($app, 'delete', $id);
+    return delegateToController($app, 'delete', $id, null);
 });
 
 $app->run();
