@@ -21,6 +21,7 @@ Sample nginx configuration:
 
 Configure the Web application's "mount" path:
 
+    $ php ./scripts/init_db.php
     $ cd /srv/www/annotator-store-lite
     $ cp ./CONFIG.sample.json ./CONFIG.json
 
