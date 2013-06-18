@@ -65,7 +65,10 @@ human body but one.  The brain!  The brain is what life is all about.
 
         var content = $(document.body).annotator();
 
-        content.annotator('addPlugin', 'Store', {prefix: ''});
+        content.annotator('addPlugin', 'Store', {
+          prefix: '',
+          annotationData: {uri: window.location.href}
+        });
       });
     </script>
   </body>
