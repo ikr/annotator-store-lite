@@ -29,8 +29,8 @@ $app->get('/', function () use ($app) {
     ]);
 });
 
-$app->get('/annotations', function () use ($app) {
-    return delegateToController($app, 'index', null, null);
+$app->get('/annotations', function (Request $req) use ($app) {
+    return delegateToController($app, 'index', $req->headers->get('Referer'), null);
 });
 
 $app->post('/annotations', function (Request $req) use ($app) {

@@ -43,6 +43,18 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
         $this->assertSame([], self::c(self::dbStub())->index()['headers']);
     }
 
+    public function testIndexFiltersOutAnnotationsWithUriNotMatchingTheReferer() {
+        $db = m::mock()->shouldIgnoreMissing()->shouldReceive('index')->andReturn([
+            ['uri' => '/foo', 'json' => '{}', 'id' => 1],
+            ['uri' => '/bar', 'json' => '{}', 'id' => 2]
+        ])->getMock();
+
+        $this->assertSame(
+            ['id' => 2],
+            self::c($db)->index('/bar')['data']
+        );
+    }
+
 //--------------------------------------------------------------------------------------------------
 
     public function testCreateDelegatesToTheDb() {
