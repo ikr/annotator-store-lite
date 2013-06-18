@@ -30,7 +30,7 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('/annotations', function () use ($app) {
-    return delegateToController($app, 'index', null);
+    return delegateToController($app, 'index', null, null);
 });
 
 $app->post('/annotations', function (Request $req) use ($app) {
