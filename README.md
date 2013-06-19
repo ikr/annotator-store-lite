@@ -70,6 +70,10 @@ and [continue the installation there](http://memegenerator.net/instance/33516935
 
     vagrant@vagrant-ubuntu-raring-64:/vagrant$ ./vendor/bin/phpunit
 
+## Viewing the demo page
+
+    http://localhost:8080/demo/
+
 # Change log
 
 ## v0.1.0 published on 2013-06-08
