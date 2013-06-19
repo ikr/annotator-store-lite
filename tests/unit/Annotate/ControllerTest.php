@@ -16,7 +16,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
             ->andReturn([])
             ->ordered()
             ->getMock()
-        )->index();
+        )->index(null);
 
         m::close();
     }
@@ -31,26 +31,26 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
                 ->shouldReceive('index')
                 ->andReturn([['id' => 42, 'json' => '{"foo":"bar"}']])
                 ->getMock()
-            )->index()['data']
+            )->index(null)['data']
         );
     }
 
     public function testIndexStatusIsNormally200() {
-        $this->assertSame(200, self::c(self::dbStub())->index()['status']);
+        $this->assertSame(200, self::c(self::dbStub())->index(null)['status']);
     }
 
     public function testIndexesHeadersMapIsEmpty() {
-        $this->assertSame([], self::c(self::dbStub())->index()['headers']);
+        $this->assertSame([], self::c(self::dbStub())->index(null)['headers']);
     }
 
     public function testIndexFiltersOutAnnotationsWithUriNotMatchingTheReferer() {
         $db = m::mock()->shouldIgnoreMissing()->shouldReceive('index')->andReturn([
-            ['uri' => '/foo', 'json' => '{}', 'id' => 1],
-            ['uri' => '/bar', 'json' => '{}', 'id' => 2]
+            ['json' => '{"uri":"/foo"}', 'id' => 1],
+            ['json' => '{"uri":"/bar"}', 'id' => 2]
         ])->getMock();
 
         $this->assertSame(
-            ['id' => 2],
+            [['uri' => '/bar', 'id' => 2]],
             self::c($db)->index('/bar')['data']
         );
     }

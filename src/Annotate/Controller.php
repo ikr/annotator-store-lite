@@ -11,20 +11,31 @@ class Controller {
         $this->apiRootUrlWithoutTrailingSlash = $apiRootUrlWithoutTrailingSlash;
     }
 
-    public function index() {
+    public function index($uriToFilterBy) {
         return [
             'status' => 200,
             'headers' => [],
 
-            'data' => array_map(
-                function ($row) {
-                    return array_merge(
-                        json_decode($row['json'], true),
-                        ['id' => $row['id']]
-                    );
-                },
+            'data' => array_values(
+                array_filter(
+                    array_map(
+                        function ($row) use ($uriToFilterBy) {
+                            $rowData = json_decode($row['json'], true);
 
-                $this->db->index($this->db->newIndexStatement())
+                            if (
+                                isset($rowData['uri']) &&
+                                $uriToFilterBy &&
+                                ($rowData['uri'] != $uriToFilterBy)
+                            ) {
+                                return null;
+                            }
+
+                            return array_merge($rowData, ['id' => $row['id']]);
+                        },
+
+                        $this->db->index($this->db->newIndexStatement())
+                    )
+                )
             )
         ];
     }
