@@ -6,3 +6,6 @@ git:
 
 sqlite3:
   pkg.installed
+
+npm:
+  pkg.installed

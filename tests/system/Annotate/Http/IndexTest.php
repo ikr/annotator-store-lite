@@ -18,6 +18,6 @@ class IndexTest extends \PHPUnit_Framework_TestCase {
  //--------------------------------------------------------------------------------------------------
 
     private static function response() {
-        return (new Client('http://127.0.0.1'))->get('/annotations')->send();
+        return (new Client('http://127.0.0.1/annotator-store-lite'))->get('annotations')->send();
     }
 }

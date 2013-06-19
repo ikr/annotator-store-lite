@@ -18,6 +18,6 @@ class ApiDescriptionTest extends \PHPUnit_Framework_TestCase {
 //--------------------------------------------------------------------------------------------------
 
     private static function data() {
-        return json_decode(file_get_contents('http://127.0.0.1/'), true);
+        return json_decode(file_get_contents('http://127.0.0.1/annotator-store-lite/'), true);
     }
 }

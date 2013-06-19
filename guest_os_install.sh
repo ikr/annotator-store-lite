@@ -7,7 +7,7 @@ sudo mv composer.phar /usr/local/bin/composer
 
 composer install --dev
 cd ./www/demo
-bower install
+# bower install
 cd ../..
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
