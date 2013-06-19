@@ -28,9 +28,8 @@ Add the CONFIG, initialize the database:
 
     $ cd /srv/www/annotator-store-lite
     $ cp ./CONFIG.sample.json ./CONFIG.json
-    $ sqlite3 ./data/db.sqlite
+    $ touch ./data/db.sqlite && chmod 664 ./data/db.sqlite
     $ php ./scripts/init_db.php
-    $ chmod 664 ./data/db.sqlite
 
 `./CONFIG.json`: sets the `apiRootUrlWithoutTrailingSlash` to `/annotator-store-lite` -- the storage
 Web application's "mount" path.
@@ -45,8 +44,8 @@ Include the JavaScript from `www/demo/index.html` into your Web page.
 
 2. Run `vagrant plugin install vagrant-salt`
 
-5. Get the Ubuntu 12.10 Quantal x86_64 base box: `vagrant box add quantal64
-   https://github.com/downloads/roderik/VagrantQuantal64Box/quantal64.box`
+5. Get the Ubuntu 13.04 Raring Ringtail amd64 base box: `vagrant box add raring64
+   http://cloud-images.ubuntu.com/raring/current/raring-server-cloudimg-vagrant-amd64-disk1.box`
 
 ## Host OS steps
 
@@ -64,12 +63,12 @@ and [continue the installation there](http://memegenerator.net/instance/33516935
 
 ## Guest OS steps
 
-    vagrant@quantal64:/vagrant$ cd /vagrant
-    vagrant@quantal64:/vagrant$ ./guest_os_install.sh
+    vagrant@vagrant-ubuntu-raring-64:~$ cd /vagrant
+    vagrant@vagrant-ubuntu-raring-64:/vagrant$ ./guest_os_install.sh
 
 ## Running the tests
 
-    vagrant@quantal64:/vagrant$ ./vendor/bin/phpunit
+    vagrant@vagrant-ubuntu-raring-64:/vagrant$ ./vendor/bin/phpunit
 
 # Change log
 
@@ -82,3 +81,4 @@ and [continue the installation there](http://memegenerator.net/instance/33516935
 
 1. Multi-page support via URI-s and HTTP Referer
 2. Use bower for the demo page dependencies
+3. Switch to the Ubuntu official 13.04 amd64 box under Vagrant

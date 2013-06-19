@@ -14,7 +14,6 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cp $DIR/CONFIG.sample.json $DIR/CONFIG.json
 
-sqlite3 $DIR/data/db.sqlite ''
+touch $DIR/data/db.sqlite && chmod 666 $DIR/data/db.sqlite
 php $DIR/scripts/init_db.php
-chmod 666 $DIR/data/db.sqlite
 echo 'Empty DB created'

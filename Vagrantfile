@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 
 Vagrant::Config.run do |config|
-  config.vm.box = "quantal64"
+  config.vm.box = "raring64"
   config.vm.forward_port 80, 8080
   config.vm.network :hostonly, "192.168.50.9"
 
