@@ -19,13 +19,16 @@ Sample nginx configuration:
         rewrite ^/annotator-store-lite/(.*)$ /$1 break;
     }
 
-Initialize the database, and configure the Web application's "mount" path:
+Add the CONFIG, initialize the database:
 
     $ cd /srv/www/annotator-store-lite
-    $ ./guest_os_install.sh
+    $ cp ./CONFIG.sample.json ./CONFIG.json
+    $ sqlite3 ./data/db.sqlite
+    $ php ./scripts/init_db.php
+    $ chmod 664 ./data/db.sqlite
 
-Edit `./CONFIG.json`: set `apiRootUrlWithoutTrailingSlash` to `/annotator-store-lite`, or to
-whatever the storage app's mount path is.
+`./CONFIG.json`: sets the `apiRootUrlWithoutTrailingSlash` to `/annotator-store-lite` -- the storage
+Web application's "mount" path.
 
 Include the JavaScript from `www/demo/index.html` into your Web page.
 
