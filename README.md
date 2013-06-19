@@ -77,3 +77,8 @@ and [continue the installation there](http://memegenerator.net/instance/33516935
 
 1. Functional Annotator Store API (without search)
 2. A working demo page with the front-end plugged in
+
+## v0.2.0 published on 2013-06-19
+
+1. Multi-page support via URI-s and HTTP Referer
+2. Use bower for the demo page dependencies
