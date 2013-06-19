@@ -1,6 +1,11 @@
 # Overview
 
-A backend store for the [Annotator](http://annotateit.org/), based on PHP/Silex and SQLite.
+A backend storage for the [Annotator](http://annotateit.org/), based on PHP/Silex and SQLite.
+
+The same server instance can be used for multiple annotated Web pages. The storage relates the
+annotations to the page URI-s that they originate from, relying on the
+[HTTP Referer](https://en.wikipedia.org/wiki/HTTP_referer) header sent with the AJAX request saving
+an annotation object.
 
 # Installation for production
 
