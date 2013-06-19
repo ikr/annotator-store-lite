@@ -37,8 +37,8 @@ Web application's "mount" path.
 
 Include the `<script>` elements from
 [www/demo/index.html](https://github.com/ikr/annotator-store-lite/blob/master/www/demo/index.html#L58)
-into your Web page. You'll probably find it easier to use the [Bower](http://bower.io) package
-manager to fetch all the JS
+into your Web page. You'll probably find it easier to use [Bower](http://bower.io) package manager
+to fetch all the JS
 [dependencies](https://github.com/ikr/annotator-store-lite/blob/master/www/demo/bower.json), just as
 the demo page does.
 
