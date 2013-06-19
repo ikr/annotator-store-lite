@@ -1,3 +1,8 @@
+apache2:
+  service:
+    - dead
+    - enable: False
+
 nginx:
   pkg:
     - installed
