@@ -34,7 +34,12 @@ Add the CONFIG, initialize the database:
 `./CONFIG.json`: sets the `apiRootUrlWithoutTrailingSlash` to `/annotator-store-lite` -- the storage
 Web application's "mount" path.
 
-Include the JavaScript from `www/demo/index.html` into your Web page.
+Include the `<script>` elements from
+[www/demo/index.html](https://github.com/ikr/annotator-store-lite/blob/master/www/demo/index.html#L58)
+into your Web page. You'll probably find it easier to use the [Bower](http://bower.io) package
+manager to fetch all the JS
+[dependencies](https://github.com/ikr/annotator-store-lite/blob/master/www/demo/bower.json), just as
+the demo page does.
 
 # Installation for development
 
