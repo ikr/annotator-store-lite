@@ -25,6 +25,10 @@ Sample nginx configuration:
         rewrite ^/annotator-store-lite/(.*)$ /$1 break;
     }
 
+    location ~ \.php$ {
+        return 404;
+    }
+
 Add the CONFIG, initialize the database:
 
     $ cd /srv/www/annotator-store-lite
