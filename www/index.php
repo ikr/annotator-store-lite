@@ -17,7 +17,7 @@ $app->error(function (\Exception $ex, $code) use ($app) {
     return $app->json([
         'statusCode' => $code,
         'message' => $ex->getMessage(),
-        'stackTrace' => $app['debug'] ? $ex->getTrace() : null
+        'stackTrace' => $app['debug'] ? $ex->getTraceAsString() : null
     ], $code);
 });
 
