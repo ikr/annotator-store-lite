@@ -77,4 +77,4 @@ the demo page does.
 ## v1.0.0 published on 2014-05-05
 
 1. Improved Vagrant/SaltStack setup
-2. dbFilePath config value introduces 
+2. dbFilePath config value introduced
