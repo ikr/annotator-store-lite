@@ -1,4 +1,4 @@
-core_packages:
+core-packages:
   pkg.installed:
     - pkgs:
       - curl
@@ -8,9 +8,11 @@ core_packages:
 bower:
   npm.installed:
     - require:
-      - pkg: core_packages
+      - pkg: core-packages
 
-node_symlink:
+node-symlink:
   file.symlink:
     - name: /usr/bin/node
     - target: /usr/bin/nodejs
+    - require:
+      - pkg: core-packages
