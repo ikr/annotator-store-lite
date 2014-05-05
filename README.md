@@ -63,11 +63,6 @@ the demo page does.
 
 # Change log
 
-## v1.0.0 published on 2014-05-05
-
-1. Improved Vagrant/SaltStack setup
-2. dbFilePath config value introduces 
-
 ## v0.1.0 published on 2013-06-08
 
 1. Functional Annotator Store API (without search)
@@ -78,3 +73,8 @@ the demo page does.
 1. Multi-page support via URI-s and HTTP Referer
 2. Use bower for the demo page dependencies
 3. Switch to the Ubuntu official 13.04 amd64 box under Vagrant
+
+## v1.0.0 published on 2014-05-05
+
+1. Improved Vagrant/SaltStack setup
+2. dbFilePath config value introduces 
