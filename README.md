@@ -33,7 +33,6 @@ Add the CONFIG, initialize the database:
 
     $ cd /srv/www/annotator-store-lite
     $ cp ./CONFIG.sample.json ./CONFIG.json
-    $ touch ./data/db.sqlite && chmod 664 ./data/db.sqlite
     $ php ./scripts/init_db.php
 
 `./CONFIG.json`: sets the `apiRootUrlWithoutTrailingSlash` to `/annotator-store-lite` -- the storage
@@ -48,33 +47,11 @@ the demo page does.
 
 # Installation for development
 
-## Prerequisites
+## Bootstrapping
 
-1. Install [VirtualBox and Vagrant](http://docs.vagrantup.com/v1/docs/getting-started/index.html)
+1. Install [VirtualBox and Vagrant](http://docs.vagrantup.com/v2/docs/getting-started/index.html)
 
-2. Run `vagrant plugin install vagrant-salt`
-
-5. Get the Ubuntu 13.04 Raring Ringtail amd64 base box: `vagrant box add raring64
-   http://cloud-images.ubuntu.com/raring/current/raring-server-cloudimg-vagrant-amd64-disk1.box`
-
-## Host OS steps
-
-From this project's root run:
-
-    ~/Sandbox/annotator-store-lite(master)$ vagrant up
-
-That will provision the development VM start-up. You'll be asked for the host OS'es root
-password. That's fine; vagrant needs it to mount the source directory into the guest OS via
-NFS. When the provisioning is done, you can ssh into the guest OS by
-
-    ~/Sandbox/annotator-store-lite(master)$ vagrant ssh
-
-and [continue the installation there](http://memegenerator.net/instance/33516935).
-
-## Guest OS steps
-
-    vagrant@vagrant-ubuntu-raring-64:~$ cd /vagrant
-    vagrant@vagrant-ubuntu-raring-64:/vagrant$ ./guest_os_install.sh
+2. Run `~/prj/annotator-store-lite(master)$ vagrant up && vagrant ssh`
 
 ## Running the tests
 
@@ -85,6 +62,11 @@ and [continue the installation there](http://memegenerator.net/instance/33516935
     http://localhost:8080/demo/
 
 # Change log
+
+## v1.0.0 published on 2014-05-05
+
+1. Improved Vagrant/SaltStack setup
+2. dbFilePath config value introduces 
 
 ## v0.1.0 published on 2013-06-08
 
