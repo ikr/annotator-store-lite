@@ -1,1 +1,4 @@
-{"apiRootUrlWithoutTrailingSlash": "/annotator-store-lite"}
+{
+    "apiRootUrlWithoutTrailingSlash": "/annotator-store-lite",
+    "dbFilePath": "/var/lib/annotator-store-lite/db.sqlite"
+}
