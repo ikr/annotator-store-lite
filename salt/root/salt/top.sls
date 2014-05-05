@@ -4,3 +4,4 @@ base:
     - nginx
     - php
     - modules
+    - data
