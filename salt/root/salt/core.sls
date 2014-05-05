@@ -1,5 +1,11 @@
-curl:
-  pkg.installed
+core_packages:
+  pkg.installed:
+    - pkgs:
+      - curl
+      - git
+      - npm
 
-git:
-  pkg.installed
+bower:
+  npm.installed:
+    - require:
+      - pkg: core_packages
