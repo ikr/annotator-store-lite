@@ -1,12 +1,12 @@
 # -*- mode: ruby -*-
+# vi: set ft=ruby :
 
-Vagrant::Config.run do |config|
-  config.vm.box = "raring64"
-  config.vm.forward_port 80, 8080
-  config.vm.network :hostonly, "192.168.50.9"
+VAGRANTFILE_API_VERSION = "2"
 
-  config.vm.share_folder "vagrant-root", "/vagrant", ".", :nfs => true
-  config.vm.share_folder "salt_file_root", "/srv", "./salt/root"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "trusty64"
+  config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.network :forwarded_port, guest: 80, host: 8080
 
   config.vm.provision :salt do |salt|
     salt.run_highstate = true
