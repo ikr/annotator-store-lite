@@ -5,6 +5,9 @@ namespace Annotate\Http;
 use Guzzle\Http\Client;
 use Guzzle\Http\Exception\ClientErrorResponseException;
 
+/**
+ * @group http
+ */
 class CreateTest extends \PHPUnit_Framework_TestCase {
     public function testCreatedAnnotationCanBeFetchedUpdatedListedAndDeleted() {
         $client = new Client('http://127.0.0.1/annotator-store-lite');

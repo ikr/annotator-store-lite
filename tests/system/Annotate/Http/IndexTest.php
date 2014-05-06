@@ -4,6 +4,9 @@ namespace Annotate\Http;
 
 use Guzzle\Http\Client;
 
+/**
+ * @group http
+ */
 class IndexTest extends \PHPUnit_Framework_TestCase {
     public function testHttpStatusIs200() {
         $this->assertSame(200, self::response()->getStatusCode());

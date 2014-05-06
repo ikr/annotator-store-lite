@@ -2,6 +2,9 @@
 
 namespace Annotate\Http;
 
+/**
+ * @group http
+ */
 class ApiDescriptionTest extends \PHPUnit_Framework_TestCase {
     public function testReturnsTheApiName() {
         $this->assertSame('Annotator Store API', self::data()['name']);

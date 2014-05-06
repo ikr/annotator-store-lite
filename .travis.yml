@@ -15,4 +15,4 @@ before_script:
   - cp ./CONFIG.sample.json ./CONFIG.json
   - php ./scripts/init_db.php
 
-script: ./vendor/bin/phpunit
+script: ./vendor/bin/phpunit --exclude-group http
