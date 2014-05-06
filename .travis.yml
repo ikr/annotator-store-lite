@@ -13,6 +13,6 @@ php:
 before_script:
   - composer install
   - cp ./CONFIG.sample.json ./CONFIG.json
-  - ./scripts/init_db.php
+  - php ./scripts/init_db.php
 
 script: ./vendor/bin/phpunit
