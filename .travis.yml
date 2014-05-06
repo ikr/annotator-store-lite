@@ -1,8 +1,8 @@
 before_install:
- - mkdir /var/lib/annotator-store-lite
- - chmod 777 /var/lib/annotator-store-lite
- - touch /var/lib/annotator-store-lite/db.sqlite
- - chmod 666 /var/lib/annotator-store-lite/db.sqlite
+ - sudo mkdir /var/lib/annotator-store-lite
+ - sudo chmod 777 /var/lib/annotator-store-lite
+ - sudo touch /var/lib/annotator-store-lite/db.sqlite
+ - sudo chmod 666 /var/lib/annotator-store-lite/db.sqlite
 
 language: php
 
