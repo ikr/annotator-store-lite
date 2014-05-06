@@ -1,3 +1,5 @@
+[Travis-CI]
+
 # Overview
 
 A backend storage for the [Annotator](http://annotateit.org/), based on PHP/Silex and SQLite. You
