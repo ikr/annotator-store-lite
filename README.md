@@ -2,7 +2,7 @@
 # Overview
 
 A backend storage for the [Annotator](http://annotateit.org/), based on PHP/Silex and SQLite. You
-can [see the demo](http://okfnlabs.org/annotator/demo/) of how Annotator works.
+can [see the demo](http://annotatorjs.org/) of how Annotator works.
 
 A single annotator-store-lite instance can be used for multiple annotated Web pages on the same
 host. The storage relates the annotations to the page URI-s that they originate from, relying on the
