@@ -1,5 +1,4 @@
-[Travis-CI]
-
+[![Build Status](https://travis-ci.org/ikr/annotator-store-lite.svg?branch=master)](https://travis-ci.org/ikr/annotator-store-lite)
 # Overview
 
 A backend storage for the [Annotator](http://annotateit.org/), based on PHP/Silex and SQLite. You
